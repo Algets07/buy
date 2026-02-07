@@ -31,31 +31,30 @@ def delete(request,id):
 
 
 def view_detail(request, id):
-    w = reviews.objects.filter(movie_id=id).order_by('-id')
     view_item = movie.objects.get(id=id)
-    a=reviews.objects.all()
-    prod=a.count()
-    average=count=0
-    for i in a:
-        average+=i.rating
-        count+=1
-        if count > 0:
-            avg = f'{average / count:.1f}'
-        else:
-            avg = "0.0"
-    data={'i': view_item,
-          'w': w,
-          'avg':avg,
-          'prod':prod
-          }
-
+    w = reviews.objects.filter(movie_id=id).order_by('-id')
+    prod = w.count()
+    average = 0
+    count = prod
+    for r in w:
+        average += r.rating
+    avg = f'{average / count:.1f}' if count else "0.0"
+    data = {
+        'i': view_item,
+        'w': w,
+        'avg': avg,
+        'prod': prod
+    }
     if request.method == 'POST':
         rating = request.POST['rating']
         comment = request.POST['comment']
-        reviews.objects.create(rating=rating,comment=comment,movie_id=id)
+        reviews.objects.create(
+            rating=rating,
+            comment=comment,
+            movie_id=id
+        )
         return redirect('detail', id=id)
-    
-    return render(request, 'detail.html',data)
+    return render(request, 'detail.html', data)
 
 
 def buy(request):
