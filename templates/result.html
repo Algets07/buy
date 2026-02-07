@@ -1,0 +1,175 @@
+{% load static %}
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #098992;
+    padding: 12px 30px;
+    color: white;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.search {
+    width: 40%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+.nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.banner {
+    background: linear-gradient(to right, #30c697, #6aa9ff);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.banner h1 {
+    font-size: 36px;
+}
+
+.banner p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.products {
+    padding: 40px 20px;
+    background: #f1f3f6;
+}
+
+.products h2 {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.card {
+    width: 300px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(80, 64, 8, 0.33);
+    transition: transform 0.3s;
+    margin-left: 30px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-body h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.card-body p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.card-body button {
+    padding: 8px 15px;
+    background: #2874f0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card-body button:hover {
+    background: #0b5ed7;
+}
+
+.footer {
+    background: #172337;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
+h3{
+    font-variant: small-caps;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Shop</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">MyShop</div>
+    <input type="text" class="search" placeholder="Search for products">
+    <div class="nav-links">
+        <a href="/" class="nav-link px-2 link-secondary">Home</a>
+        <a href="{% url 'form' %}" class="nav-link px-2 link-dark">form</a>
+        <a href="{% url 'result' %}" class="nav-link px-2 link-dark">result</a>
+    </div>
+</header>
+
+<section class="banner">
+    <h1>Big Sale Today 🎉</h1>
+    <p>Best deals you can’t miss</p>
+</section>
+
+<section class="products">
+    <h2>Featured Products</h2>
+
+    <div class="card-container">
+        {% for i in data %}
+        <div class="card">
+            <img src="{{ i.img.url }}" alt="{{ i.name }}">
+            <div class="card-body">
+                <h3>{{ i.name }}</h3>
+               <a href="{% url 'detail' i.id %}"><button>View Details</button></a>
+           </a></div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<footer class="footer">      
+    <p>© 2025 MyShop | All Rights Reserved</p>
+</footer>
+</body>
+</html>

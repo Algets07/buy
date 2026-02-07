@@ -1,0 +1,416 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ i.name }}</title>
+    <style>
+        body {
+            background-color: white;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #2874f0;
+            padding: 12px 30px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .search {
+            width: 40%;
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .nav-links a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .product-detail {
+            display: flex;
+            padding: 40px;
+            background: #f1f3f6;
+            gap: 40px;
+        }
+
+        .product-image {
+            width: 40%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+        }
+
+        .product-info {
+            width: 60%;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .product-info h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .desc {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: bold;
+            color: #388e3c;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .buy-btn {
+            background: #fb641b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .buy-btn:hover {
+            background: #e65c00;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .delete-btn:hover {
+            background: darkred;
+        }
+
+        .footer {
+            background: #172337;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        .button {
+            margin-top: 15px;
+            background-color: rgb(44, 191, 127);
+            border-radius: 20px;
+            width: 200px;
+            padding: 8px;
+        }
+
+        input,
+        textarea {
+            border-radius: 10px;
+            padding: 5px;
+        }
+    .star-rating {
+    direction: rtl;           
+    display: inline-flex;
+}
+
+.star-rating input {
+    display: none;            
+}
+
+.star-rating label {
+    font-size: 30px;
+    color: #ccc;              
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+
+.star-rating input:checked ~ label {
+    color: rgb(255, 157, 0);
+}
+span{
+    font-size: small;
+    margin: 2px;
+    border: 2px;
+    background-color: #3e6d21;
+    padding: 5px;
+    border-radius: 6px;
+    color: #fff   ;
+}
+.re {
+    margin: 30px auto;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    background-color: #fff;
+    font-variant: small-caps;
+}
+
+.re form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    width: 300px;
+    margin-left: 100px;
+}
+
+.re h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #212121;
+}
+
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 28px;
+    color: #ddd;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #ff9f00;
+}
+
+.re textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+.button {
+    background-color: #fb641b;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.button:hover {
+    background-color: #e55b17;
+}
+
+.review-card {
+    background: #fff;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    width: 400px;
+    margin-left: 200px;
+}
+
+.review-card .stars {
+    font-size: 16px;
+    color: #ff9f00;
+    margin-bottom: 5px;
+}
+
+.review-card .comment {
+    font-size: 14px;
+    color: #212121;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">MyShop</div>
+        <input type="text" class="search" placeholder="Search products">
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="{% url 'result' %}" class="nav-link px-2 link-dark">result</a>
+        </div>
+    </header>
+
+    <section class="product-detail">
+
+        <div class="product-image">
+            <img src="{{ i.img.url }}" alt="{{ i.name }}">
+        </div>
+
+        <div class="product-info">
+            <h1>{{ i.name }}</h1>
+
+            <p class="desc">{{ i.desc }}</p>
+
+            <p class="price">₹ 999 <span>{{ avg }} ★</span></p>
+            <p></p>
+                        <div class="buttons">
+                <a href="{% url 'buy' %}" ><button class="buy-btn" onclick="showLoaderAndRedirect('buy', 15000)">
+    Buy
+</button>
+</a>
+                <a href="{% url 'delete' i.id %}">
+                    <button class="delete-btn" onclick="return confirm('If you want to delete')">Delete</button>
+                </a>
+
+
+            </div>
+        </div>
+
+    </section>
+    <br><br>
+    <div class="re">
+        <div class="left">
+            <br>
+        <form action="{% url 'detail' i.id %}" method="post">
+            <h2>reviews</h2>
+            {% csrf_token %}
+             <div class="star-rating">
+        <input type="radio" name="rating" id="star5" value="5" required>
+        <label for="star5">★</label>
+
+        <input type="radio" name="rating" id="star4" value="4">
+        <label for="star4">★</label>
+
+        <input type="radio" name="rating" id="star3" value="3">
+        <label for="star3">★</label>
+
+        <input type="radio" name="rating" id="star2" value="2">
+        <label for="star2">★</label>
+
+        <input type="radio" name="rating" id="star1" value="1">
+        <label for="star1">★</label>
+    </div><br><br>
+            <textarea name="comment" id=""></textarea><br><br>
+            <input style="display: none;" type="text" value="{{i.id}}" name="id">
+            <button class="button">submit</button>
+        </form>
+        </div>
+<div class="right">
+    <p style="text-align: end;">total reviews : {{ prod }}</p>
+
+
+{% for e in w %}
+<div class="review-card">
+    <div class="stars">
+        {% for i in "12345" %}
+            {% if forloop.counter <= e.rating %}
+                ★
+            {% else %}
+                ☆
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="comment">
+        {{ e.comment }}
+    </div>
+</div>
+{% empty %}
+<p>No reviews yet</p>
+{% endfor %}
+</div>
+
+    </div>
+<div id="page-loader">
+    <div class="spinner"></div>
+</div>
+<style>
+#page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #eee;
+    border-top: 4px solid #2874f0;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+</style>
+<script>
+window.addEventListener("beforeunload", function () {
+    document.getElementById("page-loader").style.display = "flex";
+});
+</script>
+<script>
+function showLoaderAndRedirect(url, delay = 1000) {
+    document.getElementById("page-loader").style.display = "flex";
+
+    setTimeout(function () {
+        window.location.href = url;
+    }, delay); // delay in milliseconds
+}
+</script>
+
+    <footer class="footer">
+        <p>© 2025 MyShop. All rights reserved.</p>
+    </footer>
+
+
+</body>
+
+</html>
