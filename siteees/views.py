@@ -39,7 +39,10 @@ def view_detail(request, id):
     for i in a:
         average+=i.rating
         count+=1
-    avg=f'{average/count:.1f}'
+        if count > 0:
+            avg = f'{average / count:.1f}'
+        else:
+            avg = "0.0"
     data={'i': view_item,
           'w': w,
           'avg':avg,
